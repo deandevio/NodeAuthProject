@@ -23,6 +23,7 @@ form.addEventListener("submit", async (e) => {
       emailError.textContent = data.errors.email;
       passwordError.textContent = data.errors.password;
     }
+    console.log(data.errors);
 
     if (data.user) {
       location.assign("/");

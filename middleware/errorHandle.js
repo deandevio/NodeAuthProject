@@ -6,6 +6,7 @@ const errorHandle = (err) => {
       errors[properties.path] = properties.message;
     });
   }
+
   return errors;
 };
 
