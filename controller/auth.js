@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const errorHandle = require("../middleware/errorHandle");
 
 exports.getIndex = (req, res) => {
   res.render("index");
@@ -18,6 +19,7 @@ exports.postSignup = async (req, res) => {
     const user = await User.create({ email, password });
     res.status(201).json({ success: true, user: user });
   } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
+    errorHandle(err);
+    res.status(400).json(err);
   }
 };
