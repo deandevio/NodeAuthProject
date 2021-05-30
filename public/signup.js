@@ -19,11 +19,11 @@ form.addEventListener("submit", async (e) => {
     });
 
     const data = await result.json();
+    console.log(data);
     if (data.errors) {
       emailError.textContent = data.errors.email;
       passwordError.textContent = data.errors.password;
     }
-    console.log(data.errors);
 
     if (data.user) {
       location.assign("/");
