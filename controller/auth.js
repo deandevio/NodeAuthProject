@@ -18,6 +18,6 @@ exports.postSignup = async (req, res) => {
     const user = await User.create({ email, password });
     res.status(201).json({ success: true, user: user });
   } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
+    res.status(400).send(err.errors);
   }
 };
