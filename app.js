@@ -3,7 +3,6 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const DB_CONNECT = require("./config/db");
-const { json } = require("express");
 
 dotenv.config({ path: "config/config.env" });
 

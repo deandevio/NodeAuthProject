@@ -13,14 +13,36 @@ exports.getSignup = (req, res) => {
   res.render("signup");
 };
 
+exports.getDashboard = (req, res) => {
+  res.render("dashboard");
+};
+
 exports.postSignup = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.create({ email, password });
     res.status(201).json({ success: true, user: user });
   } catch (err) {
-    console.log(err.message);
     const errors = errorHandle(err);
     res.status(400).json({ success: false, errors });
+  }
+};
+
+exports.postLogin = async (req, res) => {
+  const { email, password } = req.body;
+  console.log({ email, password });
+  try {
+    const user = await User.login(email, password);
+    res.status(200).json({ success: true, user: user._id });
+  } catch (err) {
+    const errors = { err };
+    console.log(errors);
+    res.status(400).json({
+      success: false,
+      errors: {
+        email: "bad email",
+        password: "bad password",
+      },
+    });
   }
 };
