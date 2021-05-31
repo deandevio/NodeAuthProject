@@ -27,7 +27,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     if (data.user) {
-      location.assign("/");
+      location.assign("/dashboard");
     }
   } catch (err) {
     console.log(err);
