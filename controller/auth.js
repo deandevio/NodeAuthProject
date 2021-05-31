@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const errorHandle = require("../middleware/errorHandle");
+const { isAuth } = require("../middleware/isAuth");
 
 exports.getIndex = (req, res) => {
   res.render("index");
@@ -32,9 +33,17 @@ exports.postLogin = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
+    req.session.isAuth = true;
     res.status(200).json({ success: true, user: user._id });
   } catch (err) {
     const errors = errorHandle(err);
     res.status(400).json({ success: false, errors });
   }
+};
+
+exports.logoutPost = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
 };
