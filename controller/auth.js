@@ -14,8 +14,25 @@ exports.getSignup = (req, res) => {
   res.render("signup");
 };
 
-exports.getDashboard = (req, res) => {
-  res.render("dashboard");
+exports.getDashboard = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      throw Error(`${req.params.id} doesn't exist in our database`);
+    }
+    res.render("dashboard");
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({ success: true, users });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
 };
 
 exports.postSignup = async (req, res) => {

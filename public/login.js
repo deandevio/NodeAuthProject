@@ -17,9 +17,7 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
-
     const data = await result.json();
-    console.log(data);
 
     if (data.errors) {
       emailError.textContent = data.errors.email;
@@ -27,7 +25,7 @@ form.addEventListener("submit", async (e) => {
     }
 
     if (data.user) {
-      location.assign("/dashboard");
+      location.assign(`/user/${data.user}`);
     }
   } catch (err) {
     console.log(err);
