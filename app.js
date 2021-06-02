@@ -27,5 +27,6 @@ app.use(
 );
 
 app.use("/", require("./routes/routes"));
+app.use("/*", (req, res) => res.render("404"));
 
 app.listen(5000, console.log(`App is running on port 5000`));

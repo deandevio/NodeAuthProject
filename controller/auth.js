@@ -21,7 +21,9 @@ exports.getDashboard = async (req, res) => {
     }
     res.render("dashboard");
   } catch (err) {
-    res.status(400).json({ success: false, error: err });
+    console.log(err);
+    const error = errorHandle(err);
+    res.status(400).json({ success: false, error: error });
   }
 };
 
