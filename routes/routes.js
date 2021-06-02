@@ -10,5 +10,4 @@ router.route("/signup").get(getSignup).post(postSignup);
 router.route("/login").get(getLogin).post(postLogin);
 router.route("/logout").post(logoutPost);
 router.route("/users").get(getUsers);
-//router.route("/*").get(get404);
 module.exports = router;
