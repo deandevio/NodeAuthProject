@@ -9,9 +9,9 @@ const errorHandle = (err) => {
     errors.email = "Wrong email, please try again";
   }
 
-  if (err.name === "CastError") {
-    return (error = `Invalid ${err.path} at ${err.value}`);
-  }
+  // if (err.name === "CastError") {
+  //   return (error = `Invalid ${err.path} at ${err.value}`);
+  // }
 
   if (err.code === 11000) {
     errors.email = "This email is already registered";
