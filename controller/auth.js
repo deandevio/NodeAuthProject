@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const errorHandle = require("../middleware/errorHandle");
-const { isAuth } = require("../middleware/isAuth");
 
 exports.getIndex = (req, res) => {
   res.render("index");
