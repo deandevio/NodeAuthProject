@@ -1,6 +1,6 @@
 const errorHandle = (err) => {
   console.log(err);
-  let errors = { email: "", password: "" };
+  let errors = { username: "", email: "", password: "" };
 
   if (err.message === "Incorrect password") {
     errors.password = "Wrong password, please try again";

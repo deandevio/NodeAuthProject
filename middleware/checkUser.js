@@ -1,7 +1,8 @@
 const User = require("../models/User");
 
 exports.checkUser = async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  const { username } = req.params;
+  const user = await User.findOne({ username });
   res.locals.user = user;
   next();
 };

@@ -15,9 +15,10 @@ exports.getSignup = (req, res) => {
 
 exports.getDashboard = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const { username } = req.params;
+    const user = await User.findOne({ username });
     if (!user) {
-      throw Error(`${req.params.id} doesn't exist in our database`);
+      throw Error(`${req.params.username} doesn't exist in our database`);
     }
     res.render("dashboard");
   } catch (err) {
@@ -37,9 +38,9 @@ exports.getUsers = async (req, res) => {
 };
 
 exports.postSignup = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({ username, email, password });
     res.status(201).json({ success: true, user: user });
   } catch (err) {
     const errors = errorHandle(err);
@@ -52,7 +53,7 @@ exports.postLogin = async (req, res) => {
   try {
     const user = await User.login(email, password);
     req.session.isAuth = true;
-    res.status(200).json({ success: true, user: user._id });
+    res.status(200).json({ success: true, user: user.username });
   } catch (err) {
     const errors = errorHandle(err);
     res.status(400).json({ success: false, errors });
@@ -64,4 +65,16 @@ exports.logoutPost = (req, res) => {
     if (err) throw err;
     res.redirect("/");
   });
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { username } = req.params.username;
+    const user = await User.findOneAndDelete({ username });
+    if (user) {
+      res.status(200).json({ success: true, message: `The user ${user.email} with the id ${user._id} is deleted` });
+    }
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
 };
