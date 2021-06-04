@@ -1,12 +1,16 @@
 const errorHandle = (err) => {
   console.log(err);
-  let errors = { email: "", password: "" };
+  let errors = { username: "", email: "", password: "" };
 
   if (err.message === "Incorrect password") {
     errors.password = "Wrong password, please try again";
   }
   if (err.message === "Incorrect email") {
     errors.email = "Wrong email, please try again";
+  }
+
+  if (err.name === "CastError") {
+    return (error = `Invalid ${err.path} at ${err.value}`);
   }
 
   if (err.code === 11000) {

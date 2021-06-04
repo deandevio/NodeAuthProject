@@ -33,6 +33,7 @@ app.use(
 
 // Mounted routes
 app.use("/", require("./routes/routes"));
+app.use("/*", (req, res) => res.render("404"));
 
 // Server init
 app.listen(5000, console.log(`App is running on port 5000`));
