@@ -10,4 +10,5 @@ router.route("/login").get(getLogin).post(postLogin);
 router.route("/logout").post(logoutPost);
 router.route("/users").get(getUsers);
 router.route("/:username").get(checkUser, isAuth, getDashboard).delete(checkUser, deleteUser);
+
 module.exports = router;
